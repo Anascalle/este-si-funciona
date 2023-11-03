@@ -5,6 +5,8 @@ import { Screens } from "../types/navegation";
 
 const emptyState = {
   screen: Screens.DASHBOARD,
+  
+
 };
 
 export let appState = Storage.get<AppState>({

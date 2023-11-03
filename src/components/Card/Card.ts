@@ -1,4 +1,7 @@
 import styleCard from "./Card.css"
+import { dispatch } from "../../store";
+import { Actions } from "../../types/store";
+
 
 export enum Attributes {
   "profileimg" = "profileimg",
@@ -52,16 +55,17 @@ class ArtistCard extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-    this.followButton = document.createElement("button");
-    this.followButton.classList.add("button-follow");
+     this.followButton = document.createElement("button");
+     this.followButton.classList.add("button-follow");
 
-    this.followButton.textContent = "Follow";
+     this.followButton.textContent = "Follow";
 
 
-    this.followButton.addEventListener("click", () => {
-      this.toggleFollow();
-    });
+     this.followButton.addEventListener("click", () => {
+       this.toggleFollow();
+     });
 
+  
     this.render();
   }
 
@@ -79,33 +83,35 @@ class ArtistCard extends HTMLElement {
       } else {
         this.followButton.textContent = "Follow";
        
-      }
-    }
-  }
+       }
+     }
+   }
 
   toggleLike() {
-    if (this.like) {
-      if (this.like === "../src/components/img/heart-regular.png") {
-        this.like = "../src/components/img/heart-solid.png";
-      } else {
-        this.like = "../src/components/img/heart-regular.png";
-      }
+     if (this.like) {
+      if (this.like === "../../../dist/img/Me gusta.png") {
+        (this.like = "../../../dist/img/Me gusta soid.png");
+       } else {
+        this.like = "../../../dist/img/Me gusta.png";
+       }
 
-      this.render();
-    }
-  }
+       this.render();
+     }
+   }
 
-  toggleSave() {
-    if (this.save) {
-      if (this.save === "../src/components/img/bookmark-regular.png") {
-        this.save = "../src/components/img/bookmark-solid.png";
-      } else {
-        this.save = "../src/components/img/bookmark-regular.png";
-      }
+//   toggleLike() {
+//      console.log("Botón de 'like' clicado"); // Agrega este log para verificar si la función se ejecuta
+//      dispatch(like());
+//      if (this.like?.endsWith("Me gusta.png")) {
+//        this.like = "../../../dist/img/Me gusta soid.png";
+//      } else {
+//        this.isLike = "../../../dist/img/Me gusta.png";
+//      }
+//      this.render();
+//  }
 
-      this.render();
-    }
-  }
+
+
   render() {
     if (this.shadowRoot) {
       this.shadowRoot.innerHTML = `
@@ -132,21 +138,18 @@ class ArtistCard extends HTMLElement {
         this.shadowRoot.querySelector("div")?.insertBefore(this.followButton, this.shadowRoot.querySelector("p"));
       }
 
-      const likeButton = this.shadowRoot.querySelector(".like-button");
-      if (likeButton) {
-        likeButton.addEventListener("click", () => {
-          this.toggleLike();
-        });
+       const likeButton = this.shadowRoot.querySelector(".like-button");
+       if (likeButton) {
+         likeButton.addEventListener("click", () => {
+           this.toggleLike();
+         });
+       }
+        
       }
-
-      const saveButton = this.shadowRoot.querySelector(".save-button");
-      if (saveButton) {
-        saveButton.addEventListener("click", () => {
-          this.toggleSave();
-        });
-      }
-    }
-  }}
+    
+  }
+ 
+}
 
 customElements.define("artist-card", ArtistCard);
 export default ArtistCard;
